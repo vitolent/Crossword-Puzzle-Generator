@@ -1,6 +1,7 @@
 import java.util.*;
 
-public class crossWordV4 {
+
+public class crossWordV5 {
 
     public static void main(String[] args) throws Exception {
         Scanner sc = new Scanner(System.in);
@@ -20,7 +21,8 @@ public class crossWordV4 {
                 System.out.println("3 - Quit");
                 System.out.print("> ");
                 String input = sc.nextLine().trim();
-
+                
+                // ensures input is valid
                 try {
                     choice = Integer.parseInt(input);
                     if (choice == 1 || choice == 2) {
@@ -50,6 +52,7 @@ public class crossWordV4 {
                     System.out.println();
                     System.out.print("enter any key to continue > ");
                     sc.nextLine();
+                    continue;
                 }
 
                     System.out.println("Saved puzzles:");
@@ -80,7 +83,6 @@ public class crossWordV4 {
                 Object[] loaded = puzzleManager.loadPuzzle(chosenTitle);
                 if (loaded == null) {
                     System.out.println("Failed to load puzzle.");
-                    return;
                 }
 
                 char[][] solutionGrid = (char[][]) loaded[0];
@@ -95,9 +97,9 @@ public class crossWordV4 {
         
             }
 
-            }
-            sc.close();
         }
+            sc.close();
+    }
         
         public static void clearConsole() {
             System.out.print("\033[H\033[2J");

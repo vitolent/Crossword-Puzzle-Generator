@@ -1,10 +1,7 @@
-# Crossword Puzzle Generator V4
+# Crossword Puzzle Generator V5
 
-## overview
-Uses backtracking algorithm.
-It selects an anchor word, places it on the grid horizontally.
-recursively attempts to place remaining words while expanding the grid dynamically if needed.
-The program ensure each word intersects with at least one existing word on the grid.
+## Purpose
+Generates crossword puzzles and lets users play and solve the created puzzles interactively.  
 
 ## compile and execute
 to compile:
@@ -49,17 +46,21 @@ java -cp bin crossWordV4
     -  -  -  -  -  -  -  -  -  R  -  -  -  -  -  
     -  -  -  -  -  -  -  -  -  Y  -  -  -  -  -  
 
+## Main Features
+- Crossword Generation through backtracking algorithm
+- Saves generated crosswords
+- Users can solve generated crossword puzzles
+
 ## limitations
-- Minimum grid size is 15X15
-- words must follow placement constraints
-- Program does not yet create word clues or numbering
-- only prints final puzzle pattern to console
-- no GUI, console-based only
+- Word input, 
+
+- 
 
 ## Classes and methods
 
-### `crossWordV4`
-Main class that handles **user input**, calls other classes, and **prints the final puzzle**.
+### `crossWordV5`
+- Main class that handles **user input**.
+- 
 
 **Key Methods:**
 - `main(String[] args)` — Entry point; handles word input, initializes the grid, selects anchor, runs backtracking, and prints the final puzzle.

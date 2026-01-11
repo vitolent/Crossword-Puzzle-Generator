@@ -1,6 +1,14 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * starts the crossword puzzle creation workflow.
+ * 
+ * What it does:
+ * Asks for user input for number of words, words with corresponding clues, and title
+ * Selects the anchor word 
+ * Initiates the backtracking algorithm
+ */
 public class generateNewPuzzle {
 
     // static should come **before** void
@@ -78,6 +86,8 @@ public class generateNewPuzzle {
             puzzleManager.savePuzzle(title, grid.getBoard(), placedWordList, allWords);
         } else {
             System.out.println("Failed to place all words");
+            System.out.println();
+            System.out.println("Make sure your words have identical letters and try again");
         }
 
         // Print placed words
