@@ -1,4 +1,8 @@
-public class placedWord {
+import java.io.Serializable;
+
+public class placedWord implements Serializable{
+    private static final long serialVersionUID = 1L;
+
     wordKeeper word;
     int row;
     int col;

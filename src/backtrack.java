@@ -26,6 +26,7 @@ public class backtrack {
             
             if (unusedWords.isEmpty()) {
                 grid.trimGrid();
+                grid.syncPlacedWords(placedWordList);
                 return true;
             }
 

@@ -19,6 +19,10 @@ public class Grid {
         }
     }
 
+    public char[][] getBoard(){
+        return board;
+    }
+
     public void displayGrid() {
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
@@ -218,5 +222,43 @@ public class Grid {
         rows = size;
         cols = size;
     }
+
+    public void syncPlacedWords(ArrayList<placedWord> placedWordList) {
+    for (placedWord pw : placedWordList) {
+        // Look for the first letter of the word on the grid
+        char firstLetter = pw.word.letters[0];
+        boolean found = false;
+
+        for (int r = 0; r < rows && !found; r++) {
+            for (int c = 0; c < cols && !found; c++) {
+                if (board[r][c] == firstLetter) {
+                    // Check orientation match
+                    boolean matchesVert = true;
+                    boolean matchesHorz = true;
+
+                    for (int i = 0; i < pw.word.letters.length; i++) {
+                        // Vertical check
+                        if (r + i >= rows || board[r + i][c] != pw.word.letters[i]) matchesVert = false;
+                        // Horizontal check
+                        if (c + i >= cols || board[r][c + i] != pw.word.letters[i]) matchesHorz = false;
+                    }
+
+                    if (matchesVert) {
+                        pw.row = r;
+                        pw.col = c;
+                        pw.isVertical = true;
+                        found = true;
+                    } else if (matchesHorz) {
+                        pw.row = r;
+                        pw.col = c;
+                        pw.isVertical = false;
+                        found = true;
+                    }
+                }
+            }
+        }
+    }
+}
+
 
 }
