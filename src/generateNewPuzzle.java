@@ -11,7 +11,6 @@ import java.util.Scanner;
  */
 public class generateNewPuzzle {
 
-    // static should come **before** void
     public static void generatePuzzle() {
         Scanner sc = new Scanner(System.in);
 
