@@ -89,6 +89,10 @@ public class crossWordV5 {
                 Object[] loaded = puzzleManager.loadPuzzle(chosenTitle);
                 if (loaded == null) {
                     System.out.println("Failed to load puzzle.");
+
+                    System.out.println();
+                    System.out.print("enter any key to continue > ");
+                    sc.nextLine();                 
                 }
 
                 char[][] solutionGrid = (char[][]) loaded[0];
