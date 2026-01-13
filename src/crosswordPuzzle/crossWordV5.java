@@ -44,12 +44,12 @@ public class crossWordV5 {
                 }
             }
 
-            if (choice == 1) {
+            if (choice == 1) { // for puzzle creation
                 generateNewPuzzle.generatePuzzle();
                 System.out.print("enter any key to continue > ");
                 sc.nextLine();
 
-            } else if (choice == 2) {
+            } else if (choice == 2) {  // load and play created puzzles
                 String[] savedPuzzles = puzzleManager.listSavedPuzzles();
 
                 if (savedPuzzles.length == 0) {
@@ -61,10 +61,9 @@ public class crossWordV5 {
                     continue;
                 }
 
-                    System.out.println("Saved puzzles:");
+                System.out.println("Saved puzzles:");
                 for (int i = 0; i < savedPuzzles.length; i++) {
                     System.out.println((i + 1) + " - " + savedPuzzles[i]);
-
 
                 }
 
@@ -92,7 +91,8 @@ public class crossWordV5 {
 
                     System.out.println();
                     System.out.print("enter any key to continue > ");
-                    sc.nextLine();                 
+                    sc.nextLine();      
+                    continue;           
                 }
 
                 char[][] solutionGrid = (char[][]) loaded[0];

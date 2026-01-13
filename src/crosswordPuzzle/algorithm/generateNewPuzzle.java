@@ -42,8 +42,33 @@ public class generateNewPuzzle {
 
         // Inputs words and clues; stores them as wordKeeper objects
         for (int i = 0; i < numWords; i++) {
-            System.out.print("Enter Word #" + (i + 1) + ": ");
-            String wordInput = sc.nextLine().toUpperCase();
+            String wordInput;
+
+            while (true) {
+                System.out.print("Enter Word #" + (i + 1) + ": ");
+                wordInput = sc.nextLine().toUpperCase();
+
+                if(wordInput.isEmpty()) {
+                    System.out.println("Word Cannot be empty. Try again");
+                    continue;
+                } else if (!wordInput.matches("[A-Z]+")) {
+                    System.out.println("Invalid input: words must contain alphabetic letters only [A-Z].");
+                    continue;
+                }
+
+                // rejects duplicates
+                boolean isDuplicate = false;
+                for (wordKeeper wk : allWords) {
+                    if(wk.word.equals(wordInput)) {
+                        System.out.println("You already entered this word.  Please choose a different word");
+                        isDuplicate = true;
+                        break;
+                    }
+                }
+                if (isDuplicate) continue;
+                
+                break;
+            }
             System.out.print("Enter a clue: ");
             String clueInput = sc.nextLine();
             allWords.add(new wordKeeper(wordInput, i + 1, clueInput));
@@ -90,10 +115,10 @@ public class generateNewPuzzle {
             puzzleManager.savePuzzle(title, grid.getBoard(), placedWordList, allWords);
         } else {
             System.out.println("Failed to place all words");
-            System.out.println();
-            System.out.println("Make sure your words have identical letters and try again");
+            System.out.println("Make sure your input only has alphabetic letters and/or have identical letters");
         }
-
+        
+        System.out.println();
         // Print placed words
         for (placedWord pw : placedWordList) {
             System.out.println("Word Placed: " + pw.word.word);
