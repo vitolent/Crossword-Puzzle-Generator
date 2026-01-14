@@ -46,33 +46,41 @@ public class generateNewPuzzle {
 
             while (true) {
                 System.out.print("Enter Word #" + (i + 1) + ": ");
-                wordInput = sc.nextLine().toUpperCase();
+                wordInput = sc.nextLine().trim().toUpperCase();
 
+                // Check if empty
                 if(wordInput.isEmpty()) {
-                    System.out.println("Word Cannot be empty. Try again");
+                    System.out.println("Word cannot be empty. Try again.\n");
                     continue;
-                } else if (!wordInput.matches("[A-Z]+")) {
-                    System.out.println("Invalid input: words must contain alphabetic letters only [A-Z].");
+                }
+                
+                // Check if alphabetic only
+                if (!wordInput.matches("[A-Z]+")) {
+                    System.out.println("Invalid input: words must contain alphabetic letters only [A-Z] and no spaces.\n");
                     continue;
                 }
 
-                // rejects duplicates
+                // Check for duplicates
                 boolean isDuplicate = false;
                 for (wordKeeper wk : allWords) {
                     if(wk.word.equals(wordInput)) {
-                        System.out.println("You already entered this word.  Please choose a different word");
+                        System.out.println("You already entered this word. Please choose a different word.\n");
                         isDuplicate = true;
                         break;
                     }
                 }
                 if (isDuplicate) continue;
-                
+
                 break;
             }
+            
             System.out.print("Enter a clue: ");
-            String clueInput = sc.nextLine();
+            String clueInput = sc.nextLine().trim();
             allWords.add(new wordKeeper(wordInput, i + 1, clueInput));
+            System.out.println(); // Blank line for readability
         }
+        
+        if (!allWordsHaveOverlap(allWords)) return;
 
         System.out.print("Enter a Title for your puzzle > ");
         String title = sc.nextLine().trim();
@@ -115,7 +123,8 @@ public class generateNewPuzzle {
             puzzleManager.savePuzzle(title, grid.getBoard(), placedWordList, allWords);
         } else {
             System.out.println("Failed to place all words");
-            System.out.println("Make sure your input only has alphabetic letters and/or have identical letters");
+            System.out.println("Please review your input.");
+            
         }
         
         System.out.println();
@@ -128,4 +137,37 @@ public class generateNewPuzzle {
         
         grid.displayGrid();
     }
+    
+    static boolean allWordsHaveOverlap(ArrayList<wordKeeper> words) {
+        for (int i = 0; i < words.size(); i++) {
+            boolean hasOverlap = false;
+
+            for (int j = 0; j < words.size(); j++) {
+                if (i == j) continue;
+
+                if (sharesLetter(words.get(i).word, words.get(j).word)) {
+                    hasOverlap = true;
+                    break;
+                }
+            }
+
+            if (!hasOverlap) {
+            	System.out.println("ERROR: Some word/s do not share letters with any others.  Try Again");
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    static boolean sharesLetter(String a, String b) {
+        for (int i = 0; i < a.length(); i++) {
+            if (b.indexOf(a.charAt(i)) != -1) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    
 }

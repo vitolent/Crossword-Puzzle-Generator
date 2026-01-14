@@ -16,7 +16,9 @@ public class crossWordV5 {
 
         while (running) {
 
-            clearConsole();
+            System.out.println();
+            System.out.println();
+            System.out.println();
             System.out.println("Crossword Puzzle Generator V5");
 
             int choice = 0;
@@ -111,10 +113,6 @@ public class crossWordV5 {
             sc.close();
     }
         
-        public static void clearConsole() {
-            System.out.print("\033[H\033[2J");
-            System.out.flush();
-        }
 
     }
 
